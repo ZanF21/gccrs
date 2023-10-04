@@ -583,6 +583,7 @@ MacroBuiltin::include_str_handler (location_t invoc_locus,
   auto node = AST::SingleASTNode (make_string (invoc_locus, str));
   auto str_tok = make_token (Token::make_string (invoc_locus, std::move (str)));
 
+  // FIXME: Do not return an empty token vector here
   return AST::Fragment ({node}, std::move (str_tok));
 }
 
@@ -784,6 +785,7 @@ MacroBuiltin::env_handler (location_t invoc_locus, AST::MacroInvocData &invoc)
   auto tok
     = make_token (Token::make_string (invoc_locus, std::move (env_value)));
 
+  // FIXME: Do not return an empty token vector here
   return AST::Fragment ({node}, std::move (tok));
 }
 
@@ -822,6 +824,7 @@ MacroBuiltin::cfg_handler (location_t invoc_locus, AST::MacroInvocData &invoc)
   auto tok = make_token (
     Token::make (result ? TRUE_LITERAL : FALSE_LITERAL, invoc_locus));
 
+  // FIXME: Do not return an empty token vector here
   return AST::Fragment ({literal_exp}, std::move (tok));
 }
 
@@ -909,6 +912,7 @@ MacroBuiltin::line_handler (location_t invoc_locus, AST::MacroInvocData &)
   auto tok
     = make_token (Token::make_int (invoc_locus, std::to_string (current_line)));
 
+  // FIXME: Do not return an empty token vector here
   return AST::Fragment ({line_no}, std::move (tok));
 }
 
